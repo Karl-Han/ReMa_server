@@ -213,6 +213,11 @@ def insert_new_course_db(cname, tname, intro, uid):
     connection.commit()
 
     with connection.cursor() as Cursor:
+        sql = 'INSERT INTO teacher (tid, tname) value (%s, %s)'
+        Cursor.execute(sql, (tid, tname))
+    connection.commit()
+
+    with connection.cursor() as Cursor:
         sql = 'SELECT cid FROM course WHERE cname = %s and tid = %s'
         Cursor.execute(sql, (cname, tid))
         cid = Cursor.fetchone()[0]
