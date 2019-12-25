@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Tables{% endblock %}</h1>
+    {% for table in tables %}
+    <a class="action" href="{{ url_for('tableList.index', d=table) }}">{{table}}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    {% if content == None %}
+        <h2>Please choose one table above</h2>
+    {% else %}
+    <form action="{{ url_for('tableList.delete', table_name=request.args['d'])}}" method='post'>
+        <table class = 'table'>
+            <thead>
+                <tr>
+                {% for h in headers %}
+                <th>{{h}}</th>
+                {% endfor %}
+                    </tr>
+                </thead>
+
+            <tbody>
+                {% for r in content %}
+                <tr>
+                    {% if type == 'A' %}
+                    <th><input type='checkbox' name='items{{r[0]}}' value='{{r[0]}}'>{{r[0]}}</input></th>
+                    {% else %}
+                    <th>{{r[0]}}</th>
+                    {% endif %}
+                    {% for col in r[1:] %}
+                    <th>{{col}}</th>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if type == 'A' %}
+                <input type='submit' value='DELETE seleted'  onclick="return confirm('Are you sure?')"/>
+                {% else %}
+                <h2>Please use client to make modification.</h2>
+            {% endif %}
+    </form>
+    {% endif %}
+{% endblock %}

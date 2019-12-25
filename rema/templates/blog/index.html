@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Tables{% endblock %}</h1>
+    {% for table in tables %}
+    <a class="action" href="{{ url_for('tableList.table', d=table) }}">{{table}}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h2>Please choose one table above</h2>
+{% endblock %}
