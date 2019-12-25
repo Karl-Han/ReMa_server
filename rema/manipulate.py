@@ -77,10 +77,13 @@ def create_comment():
             cid = int(cid, 10)
 
             h = insert_new_comment_db(uid, comment, cid)
+            global db_hash
+            old_hash = db_hash
+            db_hash = h
             respond['status'] = 100
             respond['new_hash'] = h
-            respond['last_hash'] = db_hash
-            print('db_hash = {}, new_hash = {}'.format(db_hash, h))
+            respond['last_hash'] = old_hash
+            print('old_hash = {}, new_hash = {}'.format(old_hash, h))
             return respond
     return render_template('mani/add_comment.html')
 
