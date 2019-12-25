@@ -77,10 +77,10 @@ def create_comment():
             cid = int(cid, 10)
 
             h = insert_new_comment_db(uid, comment, cid)
+            respond['status'] = 100
             global db_hash
             old_hash = db_hash
             db_hash = h
-            respond['status'] = 100
             respond['new_hash'] = h
             respond['last_hash'] = old_hash
             print('old_hash = {}, new_hash = {}'.format(old_hash, h))
@@ -103,10 +103,14 @@ def delete_comment():
         (return_code, h) = delete_comment_db(uid, coid)
 
         respond['status'] = return_code
+        global db_hash
         if h == None:
             h = db_hash
+        old_hash = db_hash
+        db_hash = h
         respond['new_hash'] = h
-        print('db_hash = {}, new_hash = {}'.format(db_hash, h))
+        respond['last_hash'] = old_hash
+        print('old_hash = {}, new_hash = {}'.format(old_hash, h))
         return respond
 
 @mani.route('/update_comment', methods=['POST'])
@@ -126,10 +130,14 @@ def update_comment():
         (return_code, h) = update_comment_db(uid, coid, comment)
 
         respond['status'] = return_code
+        global db_hash
         if h == None:
             h = db_hash
+        old_hash = db_hash
+        db_hash = h
         respond['new_hash'] = h
-        print('db_hash = {}, new_hash = {}'.format(db_hash, h))
+        respond['last_hash'] = old_hash
+        print('old_hash = {}, new_hash = {}'.format(old_hash, h))
         return respond
 
 @mani.route('/create_course', methods=['POST'])
@@ -148,8 +156,11 @@ def create_course():
 
         h = insert_new_course_db(cname, tname, intro, uid)
         respond['status'] = 300
+        global db_hash
+        old_hash = db_hash
+        db_hash = h
         respond['new_hash'] = h
-        print('db_hash = {}, new_hash = {}'.format(db_hash, h))
+        print('old_hash = {}, new_hash = {}'.format(old_hash, h))
         return respond
 
 @mani.route('/delete_course', methods=['POST'])
@@ -168,8 +179,11 @@ def delete_course():
         (return_code, h) = delete_course_db(uid, cid)
 
         respond['status'] = return_code
+        global db_hash
+        old_hash = db_hash
+        db_hash = h
         respond['new_hash'] = h
-        print('db_hash = {}, new_hash = {}'.format(db_hash, h))
+        print('old_hash = {}, new_hash = {}'.format(old_hash , h))
         return respond
 
 @mani.route('/update_course', methods=['POST'])
@@ -215,8 +229,11 @@ def update_course():
         (return_code, h) = update_course_db(cid, cname, tid, intro, likes, uid)
 
         respond['status'] = return_code
+        global db_hash
+        old_hash = db_hash
+        db_hash = h
         respond['new_hash'] = h
-        print('db_hash = {}, new_hash = {}'.format(db_hash, h))
+        print('old_hash = {}, new_hash = {}'.format(old_hash , h))
         return respond
 
 @mani.route('/like', methods=['POST'])
