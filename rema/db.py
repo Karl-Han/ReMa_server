@@ -208,7 +208,7 @@ def get_tid_or_create_db(tname):
 def insert_new_course_db(cname, tname, intro, uid):
     #tid = get_tid_or_create_db(tname)
     with connection.cursor() as Cursor:
-        sql = 'INSERT INTO course (cname, tname, intro, likes, uid) value (%s, %s, %s, 0, %s)'
+        sql = 'INSERT INTO course (cname, tname, intro, likes, uid, tid) value (%s, %s, %s, 0, %s, 0)'
         Cursor.execute(sql, (cname, tname, intro, uid))
     connection.commit()
 
