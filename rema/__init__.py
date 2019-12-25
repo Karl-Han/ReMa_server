@@ -3,19 +3,19 @@ import pymysql
 
 from flask import Flask
 
-#connection = pymysql.connect(
-#    host='10.243.0.186',
-#    user='rema',
-#    password='rema-team',
-#    db='rema'
-#)
-
 connection = pymysql.connect(
-    host='127.0.0.1',
+    host='10.243.0.186',
     user='rema',
-    password='ReMaTeam',
+    password='rema-team',
     db='rema'
 )
+
+#connection = pymysql.connect(
+#    host='127.0.0.1',
+#    user='rema',
+#    password='ReMaTeam',
+#    db='rema'
+#)
 db_hash = ''
 
 def create_app(test_config=None):

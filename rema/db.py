@@ -67,7 +67,7 @@ def generate_all_jsons():
 def calculate_hash():
     hasher = hashlib.sha3_256()
     for table in tables:
-        with open(table + '.json', 'r', encoding='UTF-8') as f:
+        with open("json/" + table + '.json', 'r', encoding='UTF-8') as f:
             data = json.load(f)
         hasher.update(str(data).encode('utf-8'))
     h = hasher.hexdigest()

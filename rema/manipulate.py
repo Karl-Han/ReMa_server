@@ -53,6 +53,7 @@ def fetch_data(lastHash):
             respond['status'] = 602
             respond['table'] = 'incrementTable'
             respond['values'] = updates
+            respond['new_hash'] = db_hash
             return respond
         else:
             # already the latest update
