@@ -24,7 +24,7 @@
             <tbody>
                 {% for r in content %}
                 <tr>
-                    {% if type == 'A' %}
+                    {% if T %}
                     <th><input type='checkbox' name='items{{r[0]}}' value='{{r[0]}}'>{{r[0]}}</input></th>
                     {% else %}
                     <th>{{r[0]}}</th>
@@ -36,7 +36,7 @@
                 {% endfor %}
                 </tbody>
             </table>
-            {% if type == 'A' %}
+            {% if T %}
                 <input type='submit' value='DELETE seleted'  onclick="return confirm('Are you sure?')"/>
                 {% else %}
                 <h2>Please use client to make modification.</h2>

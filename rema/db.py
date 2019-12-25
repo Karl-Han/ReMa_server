@@ -221,7 +221,6 @@ def insert_new_course_db(cname, tname, intro, uid):
         sql = 'SELECT cid FROM course WHERE cname = %s and tname = %s'
         Cursor.execute(sql, (cname, tname))
         cid = Cursor.fetchone()[0]
-        print("cid = " + cid)
     h = update(300, para(cid, cname, tname, intro, uid))
     return h
 

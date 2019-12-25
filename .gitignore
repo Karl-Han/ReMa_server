@@ -6,3 +6,4 @@ pyvenv.cfg
 /rema.egg-info
 /build
 /json
+lib64

@@ -30,7 +30,14 @@ def index():
     try:
         table = request.args['d']
     except:
-        return render_template('table_list/index.html', tables = l, type=user_type)
+        predicate = (user_type == "A")
+        if predicate:
+            print(True)
+            return render_template('table_list/index.html', tables = l, T = predicate)
+        else:
+            print(False)
+            return render_template('table_list/index.html', tables = l)
+
     else:
         # got table and display data
         with connection.cursor() as Cursor:
@@ -52,7 +59,13 @@ def index():
             Cursor.execute(sql)
             res = Cursor.fetchall()
         print(res)
-        return render_template('table_list/index.html', tables = l, type=res[0], content = res, headers=headers)
+        predicate = (user_type == "A")
+        if predicate:
+            print(True)
+            return render_template('table_list/index.html', tables = l, T = predicate, content = res, headers = headers)
+        else:
+            print(False)
+            return render_template('table_list/index.html', tables = l, content = res, headers = headers)
 
 @tableList.route('/delete', methods=['POST','GET'])
 @admin_required
