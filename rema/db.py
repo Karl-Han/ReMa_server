@@ -206,22 +206,23 @@ def get_tid_or_create_db(tname):
     return tid[0]
 
 def insert_new_course_db(cname, tname, intro, uid):
-    tid = get_tid_or_create_db(tname)
+    #tid = get_tid_or_create_db(tname)
     with connection.cursor() as Cursor:
-        sql = 'INSERT INTO course (cname, tid, intro, likes, uid) value (%s, %s, %s, 0, %s)'
-        Cursor.execute(sql, (cname, tid, intro, uid))
+        sql = 'INSERT INTO course (cname, tname, intro, likes, uid) value (%s, %s, %s, 0, %s)'
+        Cursor.execute(sql, (cname, tname, intro, uid))
     connection.commit()
 
-    with connection.cursor() as Cursor:
-        sql = 'INSERT INTO teacher (tid, tname) value (%s, %s)'
-        Cursor.execute(sql, (tid, tname))
-    connection.commit()
+    #with connection.cursor() as Cursor:
+    #    sql = 'INSERT INTO teacher (tid, tname) value (%s, %s)'
+    #    Cursor.execute(sql, (tid, tname))
+    #connection.commit()
 
     with connection.cursor() as Cursor:
-        sql = 'SELECT cid FROM course WHERE cname = %s and tid = %s'
-        Cursor.execute(sql, (cname, tid))
+        sql = 'SELECT cid FROM course WHERE cname = %s and tname = %s'
+        Cursor.execute(sql, (cname, tname))
         cid = Cursor.fetchone()[0]
-    h = update(300, para(cid, cname, tid, intro, uid, tname))
+        print("cid = " + cid)
+    h = update(300, para(cid, cname, tname, intro, uid))
     return h
 
 # return status
