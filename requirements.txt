@@ -10,6 +10,6 @@ pylint==2.4.4
 PyMySQL==0.9.3
 rema==1.0.0
 typed-ast==1.4.0
-waitress==1.4.0
+waitress==1.4.1
 Werkzeug==0.16.0
 wrapt==1.11.2
