@@ -7,3 +7,4 @@ pyvenv.cfg
 /build
 /json
 lib64
+local.sql
